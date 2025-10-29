@@ -5,7 +5,7 @@
   ```bash
   npx create-expo-app@latest nome-da-sua-loja
   ```
-- Entre na pasta do aplicativo recém criado usando o terminal e alterando para o nome do seu e-commerce:
+- Entre na pasta do aplicativo recém criado usando o terminal (altere para o nome do seu e-commerce):
   ```bash
   cd nome-da-sua-loja
   ```
