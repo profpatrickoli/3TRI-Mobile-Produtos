@@ -13,7 +13,7 @@
   ```bash
   npm run reset-project
   ```
-- Abra a pasta do seu aplicativo, encontre a pasta "app" e subistitua o código do "index.tsx" pelo código desse repositório;
+- Abra a pasta do seu aplicativo, encontre a pasta "app" e substitua o código do "index.tsx" pelo código desse repositório;
 - Por fim, execute o app com:
   ```bash
   npx expo start
