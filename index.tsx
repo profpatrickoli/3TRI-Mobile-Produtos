@@ -2,13 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import React, { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    FlatList,
-    RefreshControl,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -28,82 +28,18 @@ function Main() {
   const [refreshing, setRefreshing] = useState(false);
 
   async function carregarProdutos(){
-    const dados = [
-      {
-        id_produto: 1,
-        nome: "Camiseta Básica",
-        descricao: "100% algodão, disponível em várias cores.",
-        preco: 49.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 2,
-        nome: "Tênis Esportivo",
-        descricao: "Ideal para corrida e caminhadas.",
-        preco: 199.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-
-      },
-      {
-        id_produto: 3,
-        nome: "Mochila Escolar",
-        descricao: "Grande capacidade, resistente à água.",
-        preco: 89.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 4,
-        nome: "Fone Bluetooth",
-        descricao: "Som de alta qualidade e bateria duradoura.",
-        preco: 149.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 5,
-        nome: "Relógio Digital",
-        descricao: "Design moderno com pulseira de silicone.",
-        preco: 79.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 6,
-        nome: "Garrafa Térmica",
-        descricao: "Mantém líquidos quentes por até 12h.",
-        preco: 59.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 7,
-        nome: "Carregador Portátil",
-        descricao: "10.000mAh, ideal para viagens.",
-        preco: 99.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 8,
-        nome: "Boné",
-        descricao: "Proteção solar e estilo para o dia a dia.",
-        preco: 39.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 9,
-        nome: "Luminária LED",
-        descricao: "Recarga USB e ajuste de brilho.",
-        preco: 69.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      },
-      {
-        id_produto: 10,
-        nome: "Capa para Celular",
-        descricao: "Proteção contra quedas e arranhões.",
-        preco: 29.9,
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s"
-      }
-    ]
-    setProdutos(dados);
-    setLoading(false);
-    setRefreshing(false);
+    try {
+      // VERIFICAR O IP DA MÁQUINA NO TERMINAL COM O COMANDO ifconfig
+      const resposta = await fetch("http://10.213.5.197:3000/estoque")
+      const dados = await resposta.json()
+      console.log(dados)
+      setProdutos(dados);
+    } catch (erro) {
+      console.log(erro)
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
   }
 
   useEffect(() => {
@@ -166,7 +102,7 @@ function Main() {
               <Text style={styles.nome}>{item.nome}</Text>
               <Text style={styles.descricao}>{item.descricao}</Text>
             </View>
-            <Text style={styles.preco}>R$ {item.preco.toFixed(2).replace(".", ",")}</Text>
+            <Text style={styles.preco}>R$ {item.preco}</Text>
           </View>
         )}
         contentContainerStyle={styles.lista}
