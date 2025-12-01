@@ -29,7 +29,7 @@ function Main() {
 
   async function carregarProdutos(){
     try {
-      // VERIFICAR O IP DA MÁQUINA NO TERMINAL COM O COMANDO ifconfig
+      // VERIFICAR O IP DA MÁQUINA NO TERMINAL COM O COMANDO ifconfig (Linux) OU ipconfig (Windows)
       const resposta = await fetch("http://10.213.5.197:3000/estoque")
       const dados = await resposta.json()
       console.log(dados)
